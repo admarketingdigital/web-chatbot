@@ -487,22 +487,26 @@ export default function Chat() {
 "
       >
         {/* Header */}
-        <div className="flex items-center gap-3 p-4 bg-green-600 text-white shadow-md dark:bg-green-700">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/0/02/Logo_Corte_Ingl%C3%A9s.svg"
-            alt="El Corte Inglés"
-            width={40}
-            height={40}
-            className="rounded"
-          />
-          <h1 className="flex-1 text-2xl font-extrabold tracking-tight">
-            Asistente Virtual
-          </h1>
-
-          {/* Cliente identificado */}
-          {customer && (
-            <div className="flex flex-col items-end text-sm">
-              <div className="flex items-center gap-2">
+        <div className="flex justify-between items-center p-3 sm:p-4 bg-green-600 text-white shadow-md dark:bg-green-700">
+          {/* 🟩 Zona izquierda: logo Nexia + subtítulo */}
+          <div className="flex flex-col items-start">
+            <Image
+              src="/nexia-logo.png"
+              alt="Nexia"
+              width={120}
+              height={38}
+              className="object-contain rounded-md mb-1"
+            />
+            <span
+              className="text-[10px] sm:text-xs font-orbitron tracking-[0.25em] uppercase text-white/90"
+              style={{ letterSpacing: '0.15em' }}
+            >
+              TU ASISTENTE INTELIGENTE
+            </span>
+          </div>
+          {customer ? (
+            <div className="flex flex-col items-end text-xs sm:text-sm">
+              <div className="flex items-center gap-1 sm:gap-2">
                 <span className="bg-white/20 p-1 rounded-full">
                   <User size={16} />
                 </span>
@@ -510,11 +514,21 @@ export default function Chat() {
                   {customer.first_name} {customer.last_name}
                 </span>
               </div>
-              <span className="text-xs opacity-80">
+              <span className="opacity-80 text-[10px] sm:text-xs">
                 {formatCustomerId(customer.customer_id)}
               </span>
             </div>
+          ) : (
+            <div className="flex flex-col items-end text-xs sm:text-sm opacity-80 italic">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <span className="bg-white/20 p-0 rounded-full">
+                  <User size={14} />
+                </span>
+                <span>Usuario no identificado</span>
+              </div>
+            </div>
           )}
+
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-2 rounded-full hover:bg-green-500/20 transition"
